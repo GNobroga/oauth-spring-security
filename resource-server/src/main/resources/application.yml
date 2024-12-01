@@ -1,0 +1,14 @@
+spring:
+    application:
+        name: resource-server
+    datasource:
+      url: jdbc:h2:mem:test_db
+      username: db
+      password:
+
+    h2:
+      console:
+        enabled: true
+
+server:
+    port: 8000
