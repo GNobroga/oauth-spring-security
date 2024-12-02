@@ -1,0 +1,20 @@
+spring:
+  application:
+      name: client-service
+
+  security:
+      oauth2:
+        client:
+          registration:
+            keycloak:
+                provider: keycloak
+                clientId: client-service
+                clientSecret: AiCfiXIRaQcPAv6dlqVYPiYWFu9d3K9N
+                authorizationGrantType: client_credentials
+
+          provider:
+            keycloak:
+                issuerUri: http://localhost:8080/realms/master
+
+server:
+    port: 8001

@@ -9,6 +9,8 @@ import com.github.gabriel.resource_server.repositories.ProductRepository
 import jakarta.persistence.EntityManager
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -26,13 +28,15 @@ class ProductController(
     val entityManager: EntityManager,
 ) {
     @GetMapping
-    fun getAll(): Iterable<Product> {
+    fun getAll(@AuthenticationPrincipal jwt: Jwt): Iterable<Product> {
+        println(jwt.toString())
         return repository.findAll()
     }
 
     @PostMapping
     @Transactional
     fun create(@RequestBody request: List<CreateProductRequestDTO>): ResponseEntity<Void> {
+        println("Entering in create method")
         val order = Order(
             Address(street="Rodovia Família Requieri", number=95, zipCode="293600000")
         )
